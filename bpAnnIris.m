@@ -1,15 +1,16 @@
-%zzt bpÉñ¾­ÍøÂç  http://blog.csdn.net/gongxq0124/article/details/7681000/
-% Õâ¸öËµÃ÷¸üºÃ£¬ http://www.cnblogs.com/guolili/p/5522622.html
+%zzt bpç¥ç»ç½‘ç»œ  http://blog.csdn.net/gongxq0124/article/details/7681000/
+% è¿™ä¸ªè¯´æ˜æ›´å¥½ï¼Œ http://www.cnblogs.com/guolili/p/5522622.html
+%test
 
 clc;clear all;
 
-%¶ÁÈ¡ÑµÁ·Êı¾İ
+%è¯»å–è®­ç»ƒæ•°æ®
 [f1,f2,f3,f4,class] = textread('trainData.txt' , '%f%f%f%f%f',150);
 
-%ÌØÕ÷Öµ¹éÒ»»¯
-[input,minI,maxI] = premnmx( [f1 , f2 , f3 , f4 ]')  ; %'ºÅ¾ÍÊÇĞĞºÍÁĞ»¥»»
+%ç‰¹å¾å€¼å½’ä¸€åŒ–
+[input,minI,maxI] = premnmx( [f1 , f2 , f3 , f4 ]')  ; %'å·å°±æ˜¯è¡Œå’Œåˆ—äº’æ¢
 
-%¹¹ÔìÊä³ö¾ØÕó
+%æ„é€ è¾“å‡ºçŸ©é˜µ
 s = length( class ) ;
 output = zeros( s , 3  ) ;
 for i = 1 : s 
@@ -17,32 +18,32 @@ for i = 1 : s
 end
 
 %minmax1= minmax(input);
-%´´½¨Éñ¾­ÍøÂç
+%åˆ›å»ºç¥ç»ç½‘ç»œ
 net = newff( minmax(input) , [10 3] , { 'logsig' 'purelin'} , 'traingdx' ) ; 
-% [10 3] 10´ú±íÒşº¬²ãµÚÒ»²ã½ÚµãÊı£¬3´ú±íµÚ¶ş²ã½Úµã
+% [10 3] 10ä»£è¡¨éšå«å±‚ç¬¬ä¸€å±‚èŠ‚ç‚¹æ•°ï¼Œ3ä»£è¡¨ç¬¬äºŒå±‚èŠ‚ç‚¹
 
-%ÉèÖÃÑµÁ·²ÎÊı
+%è®¾ç½®è®­ç»ƒå‚æ•°
 net.trainparam.show = 50 ;
 net.trainparam.epochs = 500 ;
 net.trainparam.goal = 0.01 ;
 net.trainParam.lr = 0.01 ;
 
-%¿ªÊ¼ÑµÁ·
-%net Ó¦¸ÃÊÇÒ»¸öÄ£ĞÍ
+%å¼€å§‹è®­ç»ƒ
+%net åº”è¯¥æ˜¯ä¸€ä¸ªæ¨¡å‹
 net = train( net, input , output' ) ;
 
 
 
-%¶ÁÈ¡²âÊÔÊı¾İ
+%è¯»å–æµ‹è¯•æ•°æ®
 [t1, t2, t3, t4, c] = textread('testData.txt' , '%f%f%f%f%f',150);
 
-%²âÊÔÊı¾İ¹éÒ»»¯
+%æµ‹è¯•æ•°æ®å½’ä¸€åŒ–
 testInput = tramnmx ( [t1,t2,t3,t4]' , minI, maxI ) ;
 
-%·ÂÕæ
+%ä»¿çœŸ
 Y = sim( net , testInput ) ;
 
-%Í³¼ÆÊ¶±ğÕıÈ·ÂÊ
+%ç»Ÿè®¡è¯†åˆ«æ­£ç¡®ç‡
 [s1 , s2] = size( Y ) ;
 hitNum = 0 ;
 for i = 1 : s2
@@ -51,5 +52,5 @@ for i = 1 : s2
         hitNum = hitNum + 1 ; 
     end
 end
-sprintf('Ê¶±ğÂÊÊÇ %3.3f%%',100 * hitNum / s2 )
+sprintf('è¯†åˆ«ç‡æ˜¯ %3.3f%%',100 * hitNum / s2 )
 
