@@ -1,6 +1,6 @@
 %zzt bp神经网络  http://blog.csdn.net/gongxq0124/article/details/7681000/
 % 这个说明更好， http://www.cnblogs.com/guolili/p/5522622.html
-%test
+%test test2
 
 clc;clear all;
 
